@@ -127,5 +127,54 @@ def prestamos():
         prestamos=prestamos
     )
 
+@app.route("/prestamo/nuevo", methods=['GET', 'POST'])
+def nuevo_prestamo():
+
+    conn = get_db_connection()
+
+    if request.method == 'POST':
+
+        fecha = request.form['fecha']
+        lector_id = request.form['lector_id']
+        libro_id = request.form['libro_id']
+
+        conn.execute(
+            """
+            INSERT INTO prestamos
+            (fecha, lector_id, libro_id)
+            VALUES (?,?,?)
+            """,
+            (fecha, lector_id, libro_id)
+        )
+
+        conn.commit()
+        conn.close()
+
+        return redirect(url_for('prestamos'))
+
+    lectores = conn.execute(
+        """
+        SELECT id,
+        nombre || ' ' || apellidos AS nombre
+        FROM lectores
+        """
+    ).fetchall()
+
+    libros = conn.execute(
+        """
+        SELECT id, titulo
+        FROM libros
+        """
+    ).fetchall()
+
+    conn.close()
+
+    return render_template(
+        'form_prestamo.html',
+        lectores=lectores,
+        libros=libros
+    )
+
+
 if __name__ == "__main__":
     app.run(debug=True)
