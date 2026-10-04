@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, request
 import sqlite3
 
 app = Flask(__name__)
@@ -36,6 +36,28 @@ def libros():
     conn.close()
 
     return render_template("libros.html", libros=libros)
+
+
+@app.route("/libro/nuevo", methods=['GET', 'POST'])
+def nuevo_libro():
+
+    if request.method == 'POST':
+        titulo = request.form['titulo']
+        autor = request.form['autor']
+
+        conn = get_db_connection()
+
+        conn.execute(
+            "INSERT INTO libros(titulo, autor) VALUES (?,?)",
+            (titulo, autor)
+        )
+
+        conn.commit()
+        conn.close()
+
+        return redirect(url_for('libros'))
+
+    return render_template('form_libro.html')
 
 
 if __name__ == "__main__":
