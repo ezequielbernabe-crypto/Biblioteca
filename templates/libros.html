@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Libros</h1>
+
+<table class="table table-striped table-hover">
+
+    <thead class="table-dark">
+        <tr>
+            <th>Id</th>
+            <th>Título</th>
+            <th>Autor</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        {% for libro in libros %}
+
+        <tr>
+            <td>{{ libro.id }}</td>
+            <td>{{ libro.titulo }}</td>
+            <td>{{ libro.autor }}</td>
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% endblock %}

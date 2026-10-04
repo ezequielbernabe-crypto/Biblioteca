@@ -27,5 +27,16 @@ def lectores():
     return render_template("lectores.html", lectores=lectores)
 
 
+@app.route("/libros")
+def libros():
+    conn = get_db_connection()
+    libros = conn.execute(
+        "SELECT * FROM libros"
+    ).fetchall()
+    conn.close()
+
+    return render_template("libros.html", libros=libros)
+
+
 if __name__ == "__main__":
     app.run(debug=True)
