@@ -103,5 +103,29 @@ def eliminar_libro(id):
 
     return redirect(url_for('libros'))
 
+@app.route("/prestamos")
+def prestamos():
+
+    conn = get_db_connection()
+
+    prestamos = conn.execute(
+        """
+        SELECT p.id,
+        p.fecha,
+        l.titulo AS libro,
+        le.nombre || ' ' || le.apellidos AS lector
+        FROM prestamos p
+        JOIN libros l ON p.libro_id = l.id
+        JOIN lectores le ON p.lector_id = le.id
+        """
+    ).fetchall()
+
+    conn.close()
+
+    return render_template(
+        'prestamos.html',
+        prestamos=prestamos
+    )
+
 if __name__ == "__main__":
     app.run(debug=True)
