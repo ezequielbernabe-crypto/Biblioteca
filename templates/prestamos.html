@@ -30,7 +30,13 @@
             <td>{{ item.fecha }}</td>
             <td>{{ item.libro }}</td>
             <td>{{ item.lector }}</td>
-            <td></td>
+            <td>
+                <a href="{{ url_for('eliminar_prestamo', id=item.id) }}"
+                class="btn btn-danger"
+                onclick="return confirm('¿Está seguro?')">
+                Eliminar
+            </a>
+            </td>
         </tr>
 
         {% endfor %}

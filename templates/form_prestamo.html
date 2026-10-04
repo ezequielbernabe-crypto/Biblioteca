@@ -3,32 +3,23 @@
 {% block content %}
 
 <div class="card">
-
     <div class="card-header">
         <h2>Nuevo préstamo</h2>
     </div>
-
     <div class="card-body">
-
         <form action="" method="POST">
-
             <div class="mb-3">
                 <label class="form-label">Fecha</label>
-
                 <input type="date"
                        class="form-control"
                        name="fecha"
                        required>
             </div>
-
             <div class="mb-3">
-
                 <label class="form-label">Lector</label>
-
                 <select name="lector_id"
                         class="form-select"
                         required>
-
                     <option value="">
                         --- Seleccione un lector ---
                     </option>
@@ -42,17 +33,12 @@
                     {% endfor %}
 
                 </select>
-
             </div>
-
             <div class="mb-3">
-
                 <label class="form-label">Libro</label>
-
                 <select name="libro_id"
                         class="form-select"
                         required>
-
                     <option value="">
                         --- Seleccione un libro ---
                     </option>
@@ -66,18 +52,13 @@
                     {% endfor %}
 
                 </select>
-
             </div>
-
             <button type="submit"
                     class="btn btn-primary">
                 Guardar
             </button>
-
         </form>
-
     </div>
-
 </div>
 
 {% endblock %}
