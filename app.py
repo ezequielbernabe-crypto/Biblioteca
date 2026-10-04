@@ -59,6 +59,34 @@ def nuevo_libro():
 
     return render_template('form_libro.html')
 
+@app.route("/libro/editar/<int:id>", methods=['GET', 'POST'])
+def editar_libro(id):
+
+    conn = get_db_connection()
+
+    libro = conn.execute(
+        "SELECT * FROM libros WHERE id=?",
+        (id,)
+    ).fetchone()
+
+    if request.method == 'POST':
+
+        titulo = request.form['titulo']
+        autor = request.form['autor']
+
+        conn.execute(
+            "UPDATE libros SET titulo=?, autor=? WHERE id=?",
+            (titulo, autor, id)
+        )
+
+        conn.commit()
+        conn.close()
+
+        return redirect(url_for('libros'))
+
+    conn.close()
+
+    return render_template('form_libro.html', libro=libro)
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -15,19 +15,25 @@
             <th>Id</th>
             <th>Título</th>
             <th>Autor</th>
+            <th>Acciones</th>
         </tr>
     </thead>
 
     <tbody>
 
         {% for libro in libros %}
-
         <tr>
             <td>{{ libro.id }}</td>
             <td>{{ libro.titulo }}</td>
             <td>{{ libro.autor }}</td>
-        </tr>
 
+            <td>
+                <a href="{{ url_for('editar_libro', id=libro.id) }}"
+                   class="btn btn-warning">
+                    Editar
+                </a>
+            </td>
+        </tr>
         {% endfor %}
 
     </tbody>
