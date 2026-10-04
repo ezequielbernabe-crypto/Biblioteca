@@ -32,6 +32,12 @@
                    class="btn btn-warning">
                     Editar
                 </a>
+
+                <a href="{{ url_for('eliminar_libro', id=libro.id) }}"
+                   class="btn btn-danger"
+                   onclick="return confirm('¿Está seguro?')">
+                    Eliminar
+                </a>
             </td>
         </tr>
         {% endfor %}

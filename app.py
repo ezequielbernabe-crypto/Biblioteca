@@ -88,5 +88,20 @@ def editar_libro(id):
 
     return render_template('form_libro.html', libro=libro)
 
+@app.route("/libro/eliminar/<int:id>")
+def eliminar_libro(id):
+
+    conn = get_db_connection()
+
+    conn.execute(
+        "DELETE FROM libros WHERE id=?",
+        (id,)
+    )
+
+    conn.commit()
+    conn.close()
+
+    return redirect(url_for('libros'))
+
 if __name__ == "__main__":
     app.run(debug=True)
