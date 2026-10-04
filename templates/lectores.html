@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Lectores</h1>
+
+<table class="table table-striped table-hover">
+
+    <thead class="table-dark">
+        <tr>
+            <th>Id</th>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        {% for lector in lectores %}
+
+        <tr>
+            <td>{{ lector.id }}</td>
+            <td>{{ lector.nombre }}</td>
+            <td>{{ lector.apellidos }}</td>
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% endblock %}
